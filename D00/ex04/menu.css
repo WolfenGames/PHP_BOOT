@@ -1,0 +1,30 @@
+.dropdown {
+    position: relative;
+    display: inline-block;
+    background-color: green;
+    border: 1px solid black;
+    border-radius: 4px;
+    height: 32px;
+    width: 204px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: green;
+    width: 204px;
+    z-index: 1;
+}
+
+p
+{
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: whitesmoke;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    border: 1px solid black;
+    border-radius: 4px;
+}
