@@ -6,15 +6,14 @@
 		$uinfo[$input[0]] = $input[1];
 		$minfo[$input[2]] = $input[3];
 	}
-	var_dump($uinfo);
-	var_export($minfo);
-	if ($argc == 1)
+	if ($argc == 2)
 	{
 		$opt = $argv[1];
 		if ($opt == "Average")
 		{
 			foreach ($uinfo as $val)
-				$ret[$uinfo] += $val;
+				$ret[$uinfo] = $ret[$uinfo] + $val;
 		}
+		print_r($ret);
 	}
 ?>
