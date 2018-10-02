@@ -1,19 +1,47 @@
 #!/usr/bin/php
 <?php
 	$file = fopen("php://stdin", "r");
+	$i = 0;
 	while ($input = fgetcsv($file, 0, ";"))
 	{
-		$uinfo[$input[0]] = $input[1];
-		$minfo[$input[2]] = $input[3];
+		if (!$arr[$input[0]])
+			$arr[$input[0]] = [0, 0, 0];
+		if ($input[2] == "moulinette")
+			$arr[$input[0]][2] = $input[1];
+		else
+		{
+			if (is_numeric($input[1]))
+			{
+				$arr[$input[0]][0] += $input[1];
+				$arr[$input[0]][1]++;
+			}
+		}
 	}
+	unset($arr["User"]);
+	ksort($arr);
 	if ($argc == 2)
 	{
 		$opt = $argv[1];
-		if ($opt == "Average")
+		if ($opt == "average_user")
 		{
-			foreach ($uinfo as $val)
-				$ret[$uinfo] = $ret[$uinfo] + $val;
+			foreach ($arr as $key => $val)
+				echo  $key . ":" . $val[0] / $val[1] . "\n";
 		}
-		print_r($ret);
+		if ($opt == "average")
+		{
+			$avg = 0;
+			$tot = 0;
+			foreach ($arr as $key => $val)
+			{
+				$tot += $val[1];
+				$avg += $val[0];
+			}
+			echo $avg / $tot . "\n";
+		}
+		if ($opt == "moulinette_variance")
+		{
+			foreach ($arr as $key => $val)
+				echo  $key . ":" . (($val[0] / $val[1]) - $val[2]) . "\n";
+		}
 	}
 ?>
