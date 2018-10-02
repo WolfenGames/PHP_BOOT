@@ -1,5 +1,5 @@
-table { height: 0.7vw; width: 100%; overflow: auto; }
-tr { height: 50px;}
+table { height: 0.4vw; width: 100%; overflow: auto; }
+tr { min-height: 10px; height: 50px;}
 .block
 {
 	width: 5.5%;

@@ -1,3 +1,8 @@
+*
+{
+	font-size: 32px;
+	font-family: 'Courier New', Courier, monospace;
+}
 .dropdown {
     position: relative;
     display: inline-block;
@@ -5,14 +10,15 @@
     border: 1px solid black;
     border-radius: 4px;
     height: 32px;
-    width: 204px;
+	width: 100%;
+	text-align: center;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: green;
-    width: 204px;
+    width: 100%;
     z-index: 1;
 }
 
@@ -21,10 +27,9 @@ p
     border: 1px solid black;
     border-radius: 4px;
     background-color: whitesmoke;
+	text-align: center;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
-    border: 1px solid black;
-    border-radius: 4px;
 }
