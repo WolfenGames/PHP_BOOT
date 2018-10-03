@@ -9,8 +9,6 @@
 			exit();
 		}
 		$info = file_get_contents($fn);
-		$info_length = strlen($info);
-		$current = 0;
 		echo $info . "\n";
 	}
 	else
