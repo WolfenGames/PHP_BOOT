@@ -2,7 +2,8 @@
 <?php
 	function ft_split($str)
 	{
-		$ret = array_filter(preg_split('/\s+/', $str));
+		$str = trim($str, " ");
+		$ret = preg_split('/\s+/', $str);
 		return ($ret);
 	}
 	$split = ft_split(trim($argv[1], " "));
