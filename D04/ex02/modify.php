@@ -24,7 +24,7 @@
         } else
         {
             $tmp['login'] = $_POST['login'];
-            $tmp['passwd'] = hash("sha256", $_POST['passwd']);
+            $tmp['passwd'] = $_POST['passwd'];
             $account[] = $tmp;
             file_put_contents("../private/password", serialize($account));
             echo "OK!\n";
