@@ -4,7 +4,9 @@
 	$file = fopen("/var/run/utmpx", "r");
 	while	($in = fread($file, 628))
 	{
+		var_dump($in);
 		$info = unpack("a256user/a4id/a32line/ipid/itype/I2time", $in);
+		var_dump($info);
 		if	($info["type"] == 7)
 			$ret[] = $info;
 	}
