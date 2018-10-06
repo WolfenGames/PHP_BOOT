@@ -27,6 +27,7 @@
 		 }
 		 if ($_POST['logout'] == "ok")
 		 {
+			 unset($_SESSION['UI']);
 			 session_destroy();
 		 }
 	}

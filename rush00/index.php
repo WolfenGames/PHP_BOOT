@@ -22,7 +22,7 @@
 		else if ($_SESSION['Logged in'])
 		{
 			?>
-			Welcome to the Jungle => <?php echo $_SESSION['UI']['Username']; ?><br />
+			Welcome to the Jungle => <?php echo $_SESSION['UI']['FirstName']; ?><br />
 			<form method="POST" action="src/login.php">
 				<button type="submit" name="logout" value="ok">logout</button>
 			</form>
