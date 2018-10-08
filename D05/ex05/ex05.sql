@@ -1,0 +1,1 @@
+DELETE FROM `db_jwolf`.`ft_table` LIMIT 5;
