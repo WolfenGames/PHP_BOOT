@@ -1,0 +1,15 @@
+
+<- Vector ----------------------------------------------------------------------
+X, Y, Z, W are coordinated stipulated in this class.
+Z is the depth element
+
+The class provides the following methods : get_x() => returns the x value
+											get_y() => returns the y value
+											get_z() => returns the z value
+											get_w() => returns the w value
+											
+
+To create a new vector you would type the following for e.g.
+	$vector = new Vector($dest, $orig);
+
+---------------------------------------------------------------------- Vector ->

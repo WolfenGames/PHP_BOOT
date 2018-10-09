@@ -1,0 +1,31 @@
+
+<- Vertex ----------------------------------------------------------------------
+
+X, Y, Z, W are coordinated stipulated in this class.
+Z is the depth element
+
+The class provides the following methods : get_x() => returns the x value
+											get_y() => returns the y value
+											get_z() => returns the z value
+											get_w() => returns the w value
+											get_color() => returns the color
+											add($vertex) => Adds the 2 vectors
+											mult($float) => Multiplies each
+															element by the float
+											sub($vertex) => Subtracts the
+															2 vectors;
+											set_x($v) => sets a new x
+											set_y($v) => sets a new y
+											set_z($v) => sets a new z
+											set_w($v) => sets a new w
+											set_color($color) => sets a new
+																	color
+
+To create a new vector you would type the following for e.g.
+	$vertex = new Vertex(new array ("x" => 1, 
+									"y" => 2, 
+									"z" => 3, 
+									"w" => 4), 
+									$color);
+
+---------------------------------------------------------------------- Vertex ->
