@@ -1,6 +1,6 @@
 <?php
 
-	class Jaime
+	class Tyrion
 	{
 		public function sleepWith($a)
 		{
