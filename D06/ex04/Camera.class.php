@@ -2,83 +2,84 @@
 
 	require_once("Vertex.class.php");
 	require_once("Vector.class.php");
-    class Camera
-    {
-        static $verbose = false;
-        private $_proj;
-        private $_tR;
-        private $_tT;
-        private $_orig;
-        private $_width;
-        private $_height;
-        private $_ratio;
+	class Camera
+	{
+		static $verbose = false;
+		private $_proj;
+		private $_tR;
+		private $_tT;
+		private $_orig;
+		private $_width;
+		private $_height;
+		private $_ratio;
 
-        public function __construct($array)
-        {
-            $this->_origine = $array['origin'];
-            $this->_tT = new Matrix(array('preset' => Matrix::TRANSLATION, 'vtc' => $this->_origine->opposite()));
-            $this->_tR = $this->_transpose($array['orientation']);
-            $this->_width = (float)$array['width'] / 2;
-            $this->_height = (float)$array['height'] / 2;
-            $this->_ratio = $this->_width / $this->_height;
-            $this->_proj = new Matrix(array(
-                'preset' => Matrix::PROJECTION,
-                'fov' => $array['fov'],
-                'ratio' => $this->_ratio,
-                'near' => $array['near'],
-                'far' => $array['far']
-            ));
-            if (Camera::$verbose) {
-      				print ($this . " constructed" . PHP_EOL);
-            }
-        }
-        public function watchVertex(Vertex $worldVertex){
-            $vtx = $this->_proj->transformVertex($this->_tR->transformVertex($worldVertex));
-            $vtx->set_x($vtx->get_x() * $this->_ratio);
-            $vtx->set_y($vtx->get_y());
-            $vtx->set_color($worldVertex->get_color());
-            return ($vtx);
-        }
-        private function _transpose(Matrix $m){
-            $tmp[0] = $m->matrix[0];
-            $tmp[1] = $m->matrix[4];
-            $tmp[2] = $m->matrix[8];
-            $tmp[3] = $m->matrix[12];
-            $tmp[4] = $m->matrix[1];
-            $tmp[5] = $m->matrix[5];
-            $tmp[6] = $m->matrix[9];
-            $tmp[7] = $m->matrix[13];
-            $tmp[8] = $m->matrix[2];
-            $tmp[9] = $m->matrix[6];
-            $tmp[10] = $m->matrix[10];
-            $tmp[11] = $m->matrix[14];
-            $tmp[12] = $m->matrix[3];
-            $tmp[13] = $m->matrix[7];
-            $tmp[14] = $m->matrix[11];
-            $tmp[15] = $m->matrix[15];
-            $m->matrix = $tmp;
-            return ($m);
-        }
-        
-        function __destruct()
-        {
-            if (Camera::$verbose)
-      				print ($this . " destructed" . PHP_EOL);
-        }
+		public function __construct($array)
+		{
+			$this->_origine = $array['origin'];
+			$this->_tT = new Matrix(array('preset' => Matrix::TRANSLATION, 'vtc' => $this->_origine->opposite()));
+			$this->_tR = $this->_transpose($array['orientation']);
+			$this->_width = (float)$array['width'] / 2;
+			$this->_height = (float)$array['height'] / 2;
+			$this->_ratio = $this->_width / $this->_height;
+			$this->_proj = new Matrix(array(
+				'preset' => Matrix::PROJECTION,
+				'fov' => $array['fov'],
+				'ratio' => $this->_ratio,
+				'near' => $array['near'],
+				'far' => $array['far']
+			));
+			if (Camera::$verbose) {
+					print ($this . " constructed" . PHP_EOL);
+			}
+		}
+		public function watchVertex(Vertex $worldVertex){
+			$vtx = $this->_proj->transformVertex($this->_tR->transformVertex($worldVertex));
+			$vtx->set_x($vtx->get_x() * $this->_ratio);
+			$vtx->set_y($vtx->get_y());
+			$vtx->set_color($worldVertex->get_color());
+			return ($vtx);
+		}
+		private function _transpose(Matrix $m){
+			$tmp[0] = $m->matrix[0];
+			$tmp[1] = $m->matrix[4];
+			$tmp[2] = $m->matrix[8];
+			$tmp[3] = $m->matrix[12];
+			$tmp[4] = $m->matrix[1];
+			$tmp[5] = $m->matrix[5];
+			$tmp[6] = $m->matrix[9];
+			$tmp[7] = $m->matrix[13];
+			$tmp[8] = $m->matrix[2];
+			$tmp[9] = $m->matrix[6];
+			$tmp[10] = $m->matrix[10];
+			$tmp[11] = $m->matrix[14];
+			$tmp[12] = $m->matrix[3];
+			$tmp[13] = $m->matrix[7];
+			$tmp[14] = $m->matrix[11];
+			$tmp[15] = $m->matrix[15];
+			$m->matrix = $tmp;
+			return ($m);
+		}
+		
+		function __destruct()
+		{
+			if (Camera::$verbose)
+					print ($this . " destructed" . PHP_EOL);
+		}
 
-        function __toString()
-        {
-            $tmp = "Camera( \n";
-            $tmp .= "+ Origine: ".$this->_origine."\n";
-            $tmp .= "+ tT:\n".$this->_tT."\n";
-            $tmp .= "+ tR:\n".$this->_tR."\n";
-            $tmp .= "+ tR->mult( tT ):\n".$this->_tR->mult($this->_tT)."\n";
-            $tmp .= "+ Proj:\n".$this->_proj."\n)";
-            return ($tmp);
-        }
+		function __toString()
+		{
+			$tmp = "Camera( \n";
+			$tmp .= "+ Origine: ".$this->_origine."\n";
+			$tmp .= "+ tT:\n".$this->_tT."\n";
+			$tmp .= "+ tR:\n".$this->_tR."\n";
+			$tmp .= "+ tR->mult( tT ):\n".$this->_tR->mult($this->_tT)."\n";
+			$tmp .= "+ Proj:\n".$this->_proj."\n)";
+			return ($tmp);
+		}
 
-        public static function doc()
-    		{
-    			return file_get_contents("./Camera.doc.txt");
-    		}
-    }
+		public static function doc()
+			{
+				return file_get_contents("./Camera.doc.txt");
+			}
+	}
+?>
