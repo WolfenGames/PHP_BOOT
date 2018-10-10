@@ -32,7 +32,7 @@
 
         public static function doc()
     		{
-    			return file_get_contents("./Vector.doc.txt");
+    			return file_get_contents("./Triangle.doc.txt");
     		}
 
         public function get_a()
