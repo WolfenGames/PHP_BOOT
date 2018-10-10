@@ -3,9 +3,13 @@
 
 	include("../inc/config.php");
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
-
 		if ($_POST['login'] == "ok")
 		{
+		    if (isset($_SESSION['cart']))
+		        $temp = $_SESSION['cart'];
+		    $_SESSION = array();
+		    $_SESSION['cart'] = $temp;
+            $_SESSION['Logged in'] = false;
 			$db = mysqli_connect(SERVERNAME, DB_USERNAME, DB_PASS, "rush00");
 			if (!$db)
 				die ("eh?");
@@ -16,19 +20,43 @@
 			$result = mysqli_query($db,$sql);
 			if (!$result)
 			{
-				die("Error creating Item Table " . mysqli_error($db));
+				die(mysqli_error($db));
 			}
+			mysqli_close($db);
 			$row = mysqli_fetch_array($result);
 			$count = mysqli_num_rows($result);
 			if($count == 1) {
 			   $_SESSION['username'] = $myusername;
+			   unset($row['HashedPassword']);
 			   $_SESSION['UI'] = $row;
+			   $_SESSION['Logged in'] = true;
 			}
+			else
+            {
+                $_SESSION = array();
+                if (ini_get("session.use_cookies")) {
+                    $params = session_get_cookie_params();
+                    setcookie(session_name(), '', time() - 42000,
+                        $params["path"], $params["domain"],
+                        $params["secure"], $params["httponly"]
+                    );
+                }
+                session_destroy();
+            }
 		 }
 		 if ($_POST['logout'] == "ok")
 		 {
-			 unset($_SESSION['UI']);
-			 session_destroy();
+		     if (isset($_SESSION['cart']))
+             $temp = $_SESSION['cart'];
+             $_SESSION = array();
+             if (ini_get("session.use_cookies")) {
+                 $params = session_get_cookie_params();
+                 setcookie(session_name(), '', time() - 42000,
+                     $params["path"], $params["domain"],
+                     $params["secure"], $params["httponly"]
+                 );
+             }
+             session_destroy();
 		 }
 	}
 	header("Location: ../index.php");

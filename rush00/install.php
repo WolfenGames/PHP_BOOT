@@ -18,12 +18,12 @@
 		LastName varchar(255),
 		FirstName varchar(255),
 		Username varchar(255) UNIQUE,
-		hashedPassword varchar(255),
-		email varchar(255),
+		HashedPassword varchar(255),
+		Email varchar(255) UNIQUE ,
 		Age int,
 		CellPhoneNumber int(10),
 		HomeAddress varchar(255),
-		DeliveryAdress varchar(255),
+		DeliveryAddress varchar(255),
 		MemberType	int(1),
 		PRIMARY KEY (ID)
 	);";
@@ -41,6 +41,7 @@
 		ID int NOT NULL,
 		Name varchar(255),
 		Description varchar(255),
+		Category varchar(255),
 		Price int(255),
 		Stock int(255),
 		PRIMARY KEY (ID)
@@ -60,12 +61,12 @@
 		LastName,
 		FirstName,
 		Username,
-		hashedPassword,
-		email,
+		HashedPassword,
+		Email,
 		Age,
 		CellPhoneNumber,
 		HomeAddress,
-		DeliveryAdress,
+		DeliveryAddress,
 		MemberType
 	)
 	VALUES(
@@ -91,4 +92,25 @@
 		echo "Error creating Def user " . mysqli_error($conn) . "\n";
 	}
 
-	?>
+	$populate_cart = "INSERT INTO `items` (`ID`, `Name`, `Description`, `Category`, `Price`, `Stock`) VALUES 
+                        ('1', 'Libft', 'I will do your libft for a minor fee', 'pre_sem', '350', '20'), 
+                        ('2', 'Get Next Line', 'I will do your Get Next Line for a higher fee', 'pre_sem', '700', '15'), 
+                        ('3', 'Filler', 'I will attempt your filler for a fee', 'Algos_one', '1000', '5'),
+                        ('4', 'FdF', 'I will copy someones github for you', 'Gfx_one', '100', '3'), 
+                        ('5', 'ft_printf', 'I will make your ft_printf, print \'f\'', 'Unix_one', '2000', '1000'), 
+                        ('6', 'Lem-in', 'I will play with your ants', 'Algos_one', '2500', '5'), 
+                        ('7', 'Wolf3D', 'I will play wolf3D for you', 'Gfx_one', '0', '0'), 
+                        ('8', 'ft_ls', 'I will make sure it does what it says.', 'Unix_one', '10000000', '0'), 
+                        ('9', 'C Exam', 'I will pretend to be you.', 'C_alone_in_the_dark', '250000', '1'),
+                        ('10', 'C Bootcmap', 'I will attempt to help you', 'C_bootcamp', '9999999', '42'),
+                        ('11', 'Php Bootcmap', 'I will make this site for you', 'PHP_bootcamp', '0', '0');";
+    if (mysqli_query($conn, $populate_cart))
+    {
+        echo "Items created successfully\n";
+    }
+    else
+    {
+        echo "Error creating Items" . mysqli_error($conn) . "\n";
+    }
+
+    ?>
