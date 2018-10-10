@@ -1,8 +1,9 @@
 <?php
 
+require_once("Vertex.class.php");
+require_once("Vector.class.php");
 class Matrix
 {
-
     const IDENTITY = "IDENTITY";
     const SCALE = "SCALE";
     const RX = "Ox ROTATION";
@@ -24,7 +25,7 @@ class Matrix
 
     public static function doc()
     {
-      return file_get_contents("./Vector.doc.txt");
+      return file_get_contents("./Matrix.doc.txt");
     }
 
     public function __construct($array = null)
@@ -196,7 +197,8 @@ class Matrix
     {
         if (Matrix::$verbose)
   				print ($this . " destructed" . PHP_EOL);
-    }
+	}
+	
     function __toString()
     {
         $tmp = "M | vtcX | vtcY | vtcZ | vtxO\n";
@@ -206,6 +208,6 @@ class Matrix
         $tmp .= "z | %0.2f | %0.2f | %0.2f | %0.2f\n";
         $tmp .= "w | %0.2f | %0.2f | %0.2f | %0.2f";
         return (vsprintf($tmp, array($this->matrix[0], $this->matrix[1], $this->matrix[2], $this->matrix[3], $this->matrix[4], $this->matrix[5], $this->matrix[6], $this->matrix[7], $this->matrix[8], $this->matrix[9], $this->matrix[10], $this->matrix[11], $this->matrix[12], $this->matrix[13], $this->matrix[14], $this->matrix[15])));
-    }
-
+	}
+}
 ?>

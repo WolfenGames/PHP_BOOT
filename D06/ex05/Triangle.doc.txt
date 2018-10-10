@@ -1,0 +1,14 @@
+
+<- Triangle --------------------------------------------------------------------
+
+Triangles are essential to the render of a object.
+Every object is made up of Triangles and Triangles are 3 points
+Therefore we require
+’A’: Vertex of the first point of the triangle, mandatory.
+’B’: Vertex of the second point of the triangle, mandatory.
+’C’: Vertex of the third point of the triangle, mandatory.
+
+There is a get function for each of these aswell. 
+get_a(), get_b(), get_c(); <- return as Vertexes
+
+-------------------------------------------------------------------- Triangle ->

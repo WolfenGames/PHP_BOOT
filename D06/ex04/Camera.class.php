@@ -1,4 +1,7 @@
 <?php
+
+	require_once("Vertex.class.php");
+	require_once("Vector.class.php");
     class Camera
     {
         static $verbose = false;
@@ -31,9 +34,9 @@
         }
         public function watchVertex(Vertex $worldVertex){
             $vtx = $this->_proj->transformVertex($this->_tR->transformVertex($worldVertex));
-            $vtx->setX($vtx->getX() * $this->_ratio);
-            $vtx->setY($vtx->getY());
-            $vtx->setColor($worldVertex->getColor());
+            $vtx->set_x($vtx->get_x() * $this->_ratio);
+            $vtx->set_y($vtx->get_y());
+            $vtx->set_color($worldVertex->get_color());
             return ($vtx);
         }
         private function _transpose(Matrix $m){
@@ -76,6 +79,6 @@
 
         public static function doc()
     		{
-    			return file_get_contents("./Vector.doc.txt");
+    			return file_get_contents("./Camera.doc.txt");
     		}
     }

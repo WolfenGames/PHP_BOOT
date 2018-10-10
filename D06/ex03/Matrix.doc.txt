@@ -1,0 +1,45 @@
+
+<- Matrix ----------------------------------------------------------------------
+
+We need this to set up a 4x4 matrices to handle transformation, translation,
+and projection of our camera, objects.
+
+Most of the class is setup and handled in construction.
+
+The variables to be set are as follows ::
+
+scale -> Value to scale
+preset -> one of the constants
+			IDENTITY
+			scale
+			RX
+			RY
+			RZ
+			TRANSLATION
+			PROJECTION
+angle -> angle of the object / camera
+vtc -> translation vector
+fov -> field of view, how much do you want to see
+ratio -> projected image ratio
+near -> clipping plane closest to the camera
+far -> distance clipping plane, away from the camera
+
+To create a new matrix instance the following is an eg:
+$P = new Matrix( array( 'preset' => Matrix::PROJECTION,
+						'fov' => 60,
+						'ratio' => 640/480,
+						'near' => 1.0,
+						'far' => -50.0 ) );
+
+Functions availible::
+
+Matrix mult( Matrix $v ) 
+
+returns the multiplication of both matrices.
+
+Vertex transformVertex( Vertex $vtx )
+
+returns a new vertex resulting from
+the transformation of the vertex by the matrix.
+
+---------------------------------------------------------------------- Matrix ->

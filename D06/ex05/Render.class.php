@@ -1,4 +1,5 @@
 <?php
+	require_once("Vertex.class.php");
     class Render
     {
         const VERTEX = 'vertex';
