@@ -11,7 +11,7 @@
 		const TRANSLATION = "TRANSLATION";
 		const PROJECTION = "PROJECTION";
 
-		protected $matrix = array();
+		protected $mat = array();
 		private $_preset;
 		private $_scale;
 		private $_angle;
@@ -54,11 +54,11 @@
 					else
 						echo "Matrix " . $this->_preset . " preset instance constructed\n";
 				}
-				$this->dispatch();
+				$this->do_da_thing();
 			}
 		}
 
-		private function dispatch()
+		private function do_da_thing()
 		{
 			switch ($this->_preset) {
 				case (Matrix::IDENTITY) :
@@ -88,65 +88,65 @@
 		private function createMatrix()
 		{
 			for ($i = 0; $i < 16; $i++) {
-				$this->matrix[$i] = 0;
+				$this->mat[$i] = 0;
 			}
 		}
 
 		private function identity($scale)
 		{
-			$this->matrix[0] = $scale;
-			$this->matrix[5] = $scale;
-			$this->matrix[10] = $scale;
-			$this->matrix[15] = 1;
+			$this->mat[0] = $scale;
+			$this->mat[5] = $scale;
+			$this->mat[10] = $scale;
+			$this->mat[15] = 1;
 		}
 
 		private function translation()
 		{
 			$this->identity(1);
-			$this->matrix[3] = $this->_vtc->get_x();
-			$this->matrix[7] = $this->_vtc->get_y();
-			$this->matrix[11] = $this->_vtc->get_z();
+			$this->mat[3] = $this->_vtc->get_x();
+			$this->mat[7] = $this->_vtc->get_y();
+			$this->mat[11] = $this->_vtc->get_z();
 		}
 
 		private function rotation_x()
 		{
 			$this->identity(1);
-			$this->matrix[0] = 1;
-			$this->matrix[5] = cos($this->_angle);
-			$this->matrix[6] = -sin($this->_angle);
-			$this->matrix[9] = sin($this->_angle);
-			$this->matrix[10] = cos($this->_angle);
+			$this->mat[0] = 1;
+			$this->mat[5] = cos($this->_angle);
+			$this->mat[6] = -sin($this->_angle);
+			$this->mat[9] = sin($this->_angle);
+			$this->mat[10] = cos($this->_angle);
 		}
 
 		private function rotation_y()
 		{
 			$this->identity(1);
-			$this->matrix[0] = cos($this->_angle);
-			$this->matrix[2] = sin($this->_angle);
-			$this->matrix[5] = 1;
-			$this->matrix[8] = -sin($this->_angle);
-			$this->matrix[10] = cos($this->_angle);
+			$this->mat[0] = cos($this->_angle);
+			$this->mat[2] = sin($this->_angle);
+			$this->mat[5] = 1;
+			$this->mat[8] = -sin($this->_angle);
+			$this->mat[10] = cos($this->_angle);
 		}
 
 		private function rotation_z()
 		{
 			$this->identity(1);
-			$this->matrix[0] = cos($this->_angle);
-			$this->matrix[1] = -sin($this->_angle);
-			$this->matrix[4] = sin($this->_angle);
-			$this->matrix[5] = cos($this->_angle);
-			$this->matrix[10] = 1;
+			$this->mat[0] = cos($this->_angle);
+			$this->mat[1] = -sin($this->_angle);
+			$this->mat[4] = sin($this->_angle);
+			$this->mat[5] = cos($this->_angle);
+			$this->mat[10] = 1;
 		}
 
 		private function projection()
 		{
 			$this->identity(1);
-			$this->matrix[5] = 1 / tan(0.5 * deg2rad($this->_fov));
-			$this->matrix[0] = $this->matrix[5] / $this->_ratio;
-			$this->matrix[10] = -1 * (-$this->_near - $this->_far) / ($this->_near - $this->_far);
-			$this->matrix[14] = -1;
-			$this->matrix[11] = (2 * $this->_near * $this->_far) / ($this->_near - $this->_far);
-			$this->matrix[15] = 0;
+			$this->mat[5] = 1 / tan(0.5 * deg2rad($this->_fov));
+			$this->mat[0] = $this->mat[5] / $this->_ratio;
+			$this->mat[10] = -1 * (-$this->_near - $this->_far) / ($this->_near - $this->_far);
+			$this->mat[14] = -1;
+			$this->mat[11] = (2 * $this->_near * $this->_far) / ($this->_near - $this->_far);
+			$this->mat[15] = 0;
 		}
 
 		private function check()
@@ -169,24 +169,24 @@
 			for ($i = 0; $i < 16; $i += 4) {
 				for ($j = 0; $j < 4; $j++) {
 					$tmp[$i + $j] = 0;
-					$tmp[$i + $j] += $this->matrix[$i + 0] * $v->matrix[$j + 0];
-					$tmp[$i + $j] += $this->matrix[$i + 1] * $v->matrix[$j + 4];
-					$tmp[$i + $j] += $this->matrix[$i + 2] * $v->matrix[$j + 8];
-					$tmp[$i + $j] += $this->matrix[$i + 3] * $v->matrix[$j + 12];
+					$tmp[$i + $j] += $this->mat[$i + 0] * $v->mat[$j + 0];
+					$tmp[$i + $j] += $this->mat[$i + 1] * $v->mat[$j + 4];
+					$tmp[$i + $j] += $this->mat[$i + 2] * $v->mat[$j + 8];
+					$tmp[$i + $j] += $this->mat[$i + 3] * $v->mat[$j + 12];
 				}
 			}
 			$matrice = new Matrix();
-			$matrice->matrix = $tmp;
+			$matrice->mat = $tmp;
 			return $matrice;
 		}
 
 		public function transformVertex(Vertex $vtx)
 		{
 			$tmp = array();
-			$tmp['x'] = ($vtx->get_x() * $this->matrix[0]) + ($vtx->get_y() * $this->matrix[1]) + ($vtx->get_z() * $this->matrix[2]) + ($vtx->get_w() * $this->matrix[3]);
-			$tmp['y'] = ($vtx->get_x() * $this->matrix[4]) + ($vtx->get_y() * $this->matrix[5]) + ($vtx->get_z() * $this->matrix[6]) + ($vtx->get_w() * $this->matrix[7]);
-			$tmp['z'] = ($vtx->get_x() * $this->matrix[8]) + ($vtx->get_y() * $this->matrix[9]) + ($vtx->get_z() * $this->matrix[10]) + ($vtx->get_w() * $this->matrix[11]);
-			$tmp['w'] = ($vtx->get_x() * $this->matrix[11]) + ($vtx->get_y() * $this->matrix[13]) + ($vtx->get_z() * $this->matrix[14]) + ($vtx->get_w() * $this->matrix[15]);
+			$tmp['x'] = ($vtx->get_x() * $this->mat[0]) + ($vtx->get_y() * $this->mat[1]) + ($vtx->get_z() * $this->mat[2]) + ($vtx->get_w() * $this->mat[3]);
+			$tmp['y'] = ($vtx->get_x() * $this->mat[4]) + ($vtx->get_y() * $this->mat[5]) + ($vtx->get_z() * $this->mat[6]) + ($vtx->get_w() * $this->mat[7]);
+			$tmp['z'] = ($vtx->get_x() * $this->mat[8]) + ($vtx->get_y() * $this->mat[9]) + ($vtx->get_z() * $this->mat[10]) + ($vtx->get_w() * $this->mat[11]);
+			$tmp['w'] = ($vtx->get_x() * $this->mat[11]) + ($vtx->get_y() * $this->mat[13]) + ($vtx->get_z() * $this->mat[14]) + ($vtx->get_w() * $this->mat[15]);
 			$tmp['color'] = $vtx->get_color();
 			$vertex = new Vertex($tmp);
 			return $vertex;
@@ -195,7 +195,7 @@
 		function __destruct()
 		{
 			if (Matrix::$verbose)
-					print ($this . " destructed" . PHP_EOL);
+					print ("Matrix instance destructed" . PHP_EOL);
 		}
 
 		function __toString()
@@ -206,7 +206,10 @@
 			$tmp .= "y | %0.2f | %0.2f | %0.2f | %0.2f\n";
 			$tmp .= "z | %0.2f | %0.2f | %0.2f | %0.2f\n";
 			$tmp .= "w | %0.2f | %0.2f | %0.2f | %0.2f";
-			return (vsprintf($tmp, array($this->matrix[0], $this->matrix[1], $this->matrix[2], $this->matrix[3], $this->matrix[4], $this->matrix[5], $this->matrix[6], $this->matrix[7], $this->matrix[8], $this->matrix[9], $this->matrix[10], $this->matrix[11], $this->matrix[12], $this->matrix[13], $this->matrix[14], $this->matrix[15])));
+			return (vsprintf($tmp, array($this->mat[0], $this->mat[1], $this->mat[2], $this->mat[3],
+								$this->mat[4], $this->mat[5], $this->mat[6], $this->mat[7],
+								$this->mat[8],$this->mat[9], $this->mat[10], $this->mat[11],
+								$this->mat[12], $this->mat[13], $this->mat[14], $this->mat[15])));
 		}
 	}
 ?>
