@@ -27,6 +27,7 @@ function save() {
 	document.cookie = JSON.stringify(newCook);
 }
 
+
 function newI()
 {
 	var info = prompt("What would you like to do?", "");
