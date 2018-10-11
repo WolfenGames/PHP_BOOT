@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>EX02 ToDo - JS</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+	<style>
+	*
+	{
+		font-family: Arial, Helvetica, sans-serif;
+	}
+	body
+	{
+		background-image: linear-gradient(blue, aqua);
+		background-repeat: no-repeat;
+		background-size: auto;
+	}
+	.space
+	{
+		width: 25%;
+	}
+	.Container
+	{
+		display: flex;
+		flex-direction: row;
+	}
+	.Content
+	{
+		display: block;
+		background-color: aliceblue;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.Rainbow {
+	-webkit-animation: rainbow 5s infinite;
+	-ms-animation: rainbow 5s infinite;
+	animation: rainbow 5s infinite;
+	}
+	@-webkit-keyframes rainbow{
+		0%{color: orange;}
+		10%{color: purple;}
+		20%{color: red;}
+		40%{color: yellow;}
+		60%{color: green;}
+		100%{color: blue;}
+		100%{color: orange;}
+	}
+	@-ms-keyframes rainbow{
+		0%{color: orange;}
+		10%{color: purple;}
+		20%{color: red;}
+		40%{color: yellow;}
+		60%{color: green;}
+		100%{color: blue;}
+		100%{color: orange;}
+	}
+	@keyframes rainbow{
+		0%{color: orange;}
+		10%{color: purple;}
+		20%{color: red;}
+		40%{color: yellow;}
+		60%{color: green;}
+		100%{color: blue;}
+		100%{color: orange;}
+	}
+	.Header
+	{
+		text-align: center;
+	}
+	</style>
+	<script src="todo.js"></script>
+</head>
+<body>
+	<div class="Header">
+		<h1 class="Rainbow">--ToDo list--</h1>
+	</div>
+	<div class="Container">
+		<div class="space"></div>
+		<div class="Content" id="Content">
+			<input type="submit" id="New" value="New">
+			<div class="ft_list">
+
+			</div>
+		</div>
+		<div class="space"></div>
+	</div>
+</body>
+</html>
