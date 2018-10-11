@@ -24,7 +24,7 @@ function save() {
 	var newCook = [];
 	for (var i = 0; i < items.length; i++)
 		newCook.push(items[i].innerHTML);
-	document.cookie = "ToDo="+ JSON.stringify(newCook) + "; expires=Thu, 18 Dec 3000 12:00:00 UTC; path=/";
+	document.cookie = JSON.stringify(newCook);
 }
 
 function newI()
