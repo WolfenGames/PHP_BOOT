@@ -1,6 +1,21 @@
 <?php
-	class Jaime
+
+	class Jaime extends Lannister
 	{
+		public static $verbose = false;
+
+		public function __construct()
+		{
+			if (Self::$verbose)
+				print ($this . " constructed." . PHP_EOL);
+		}
+
+		public function __destruct()
+		{
+			if (Self::$verbose)
+				print ($this . " destructed." . PHP_EOL);
+		}
+
 		public function sleepWith($a)
 		{
 			if ($a instanceof Tyrion)

@@ -1,17 +1,26 @@
 <?php
 
-class Tyrion extends Lanister
-{
-	public function __constructor()
+	class Tyrion extends Lannister
 	{
-		parent::__constructor();
-		print("My name is Tyrion.". PHP_EOL);
-	}
+		public static $verbose = false;
+		public function __construct()
+		{
+			parent::__construct();
+			print("My name is Tyrion.". PHP_EOL);
+			if (Self::$verbose)
+				print ($this . " constructed." . PHP_EOL);
+		}
 
-	public function getSize()
-	{
-		print("Short");
+		public function __destruct()
+		{
+			if (Self::$verbose == TRUE)
+				print ($this . " destructed." . PHP_EOL);
+		}
+
+		public function getSize()
+		{
+			print("Short");
+		}
 	}
-}
 
 ?>

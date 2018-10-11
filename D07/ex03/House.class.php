@@ -1,15 +1,29 @@
 <?php
 
-abstract class House
-{
-	public function introduce()
+	abstract class House
 	{
-		print ("House " . $this->getHouseName . " " . $this->getHouseSeat . ": " . $this->getHouseMotto . PHP_EOL);	
-	}
+		public static $verbose = false;
 
-	abstract function getHouseName();
-	abstract function getHouseMotto();
-	abstract function getHouseSeat();
-}
+		public function __construct()
+		{
+			if (Self::$verbose)
+				print ($this . " constructed." . PHP_EOL);
+		}
+
+		public function __destruct()
+		{
+			if (Self::$verbose)
+				print ($this . " destructed." . PHP_EOL);
+		}
+
+		public function introduce()
+		{
+			print ("House " . $this->getHouseName() . " of " . $this->getHouseSeat() . ' : "' . $this->getHouseMotto() . '"' . PHP_EOL);	
+		}
+
+		abstract function getHouseName();
+		abstract function getHouseMotto();
+		abstract function getHouseSeat();
+	}
 
 ?>
