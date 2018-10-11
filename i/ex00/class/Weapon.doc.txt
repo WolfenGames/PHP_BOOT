@@ -1,0 +1,17 @@
+
+<- Weapon ----------------------------------------------------------------------
+The Weapon, the item used on your amazing awesome overpowered non heretic ships
+to anihalate the enemies out of existence.
+
+To construct a weapon the following is needed
+$newWeapon = new Weapon(
+	array(
+		"Name" => someName,
+		"Charge" => someCharge, // Init 0, gains charges per PP used.
+		"ShortRange" => someShortRange,
+		"MiddleRange" => someMiddleRange,
+		"LongRange" => someLongRange,
+		"EffectZone" => someEfectZone
+	)
+);
+---------------------------------------------------------------------- Weapon ->

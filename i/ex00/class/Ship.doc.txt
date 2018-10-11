@@ -1,0 +1,19 @@
+
+<- Ship ------------------------------------------------------------------------
+The Ship is your unit. Your unit is going to be one of the reasons you will
+either win, or die a painful death.
+
+To construct a ship the following is needed
+$newShip = new Ship(
+	array(
+		"Name" => someName,
+		"Size" => new Size(height, width),
+		"HullPoints" => someHP,
+		"PP" => somePP, //Engine Power
+		"Speed" => someSpeed,
+		"Handling" => someHandling,
+		"Bouclier" => someBouclier, //Shield
+		"Weapons" => new Weapon() // See Weapon.doc.txt
+	)
+);
+------------------------------------------------------------------------ Ship ->

@@ -1,0 +1,23 @@
+
+<- Game ------------------------------------------------------------------------
+This is game, the brain and the ultimate fate of your life.
+Its size of 150 x 100.
+--------------------------------------------------------------------------------
+:::::::::::::::::::::::::::::::RULES::::::::::::::::::::::::::::::::::::::::::::
+--------------------------------------------------------------------------------
+Both enemy fleets start from opposite corners and all the spaceships are 
+stationary.
+
+There must be a few obstacles (asteroids or space stations for example).
+Up to you which obstacles you include.
+The goal is to block the movements of the spaceships nd to break the lines
+of fire to encourage maneuvers. The board cannot be filled with obstacles.
+5 or 6 obstacles of about 10 cells each will do. You can of course adapt these
+values to your liking.
+
+The position and the size of the obstacles do not have to be random if you do
+not wish to spend more time on it.
+
+A spaceship that is out of bounds or that bumps into an obstacle for any reason
+is eliminated.
+------------------------------------------------------------------------ Game ->
