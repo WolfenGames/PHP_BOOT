@@ -4,8 +4,8 @@ var cookie = new Array();
 $(document).ready(function(){
 	$('#New').click(newI);
 	var temp = document.cookie;
-	$('.ft_list div').click(del);
     ft_list = $('.ft_list');
+	$('.ft_list div').click(del);
 	if (temp){
 		cookie = JSON.parse(temp);
 		cookie.forEach(function (e)
