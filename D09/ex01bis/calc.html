@@ -46,12 +46,11 @@
 
 		function calculate()
 		{
-			Num1 = parseInt(document.getElementById("Num1").value, 10);
-			Num2 = parseInt(document.getElementById("Num2").value, 10);
-			var e = document.getElementById("options");
-			Opt = e.options[e.selectedIndex].value;
+			Num1 = parseInt($('#Num1').val(), 10);
+			Num2 = parseInt($('#Num2').val(), 10);
+			Opt = $( "#Options option:selected" ).val();
 			var res = 0;
-			if (Num1 < 0 || Num2 < 0)
+			if (Num1 < 0 || Num2 < 0 || !Num1 || !Num2)
 			{
 				alert("Error :(");
 				console.log("Error :(");
@@ -85,7 +84,7 @@
 <body>
 	<form action="#" id="calc">
 		<input type="number" id="Num1" value="">
-		<select id="options" class="Option">
+		<select id="Options" class="Options">
 			<option value="Add">+</option>
 			<option value="Sub">-</option>
 			<option value="Mult">*</option>
