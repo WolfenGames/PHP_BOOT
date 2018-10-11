@@ -1,5 +1,5 @@
 var ft_list;
-var cookie = [];
+var cookie = new Array();
 
 window.onload = function() {
 	this.document.querySelector("#New").addEventListener("click", newI);
@@ -14,12 +14,17 @@ window.onload = function() {
 	}
 }
 
-window.onunload = function() {
+window.onunload = function() 
+{
+	save();
+}
+
+function save() {
 	var items = ft_list.children;
 	var newCook = [];
 	for (var i = 0; i < items.length; i++)
-		newCookie.push(items[i].innerHTML);
-	document.cookie = JSON.stringify(newCook);
+		newCook.push(items[i].innerHTML);
+	document.cookie = "ToDo="+ JSON.stringify(newCook) + "; expires=Thu, 18 Dec 3000 12:00:00 UTC; path=/";
 }
 
 function newI()
@@ -27,6 +32,7 @@ function newI()
 	var info = prompt("What would you like to do?", "");
 	if (info)
 		add(info);
+	save();
 }
 
 function add(info)
