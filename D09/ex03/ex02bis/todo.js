@@ -16,7 +16,6 @@ window.onload = function() {
 	}
 }
 
-
 function newItem()
 {
 	var info = prompt("What would you like to do?", "");
